@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <div class="marca">
+            <span class="logo">◆</span>
+            <div>
+                <strong>Gestão Comercial</strong>
+                <small>Controle de vendas</small>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#inicio">▦ &nbsp; Visão geral</a>
+            <a href="#analises">◫ &nbsp; Análises</a>
+            <a href="#pedidos">▤ &nbsp; Pedidos</a>
+        </nav>
+
+        <div class="status" id="status">
+            Aguardando planilha...
+        </div>
+    </aside>
+
+    <main class="conteudo">
+        <header>
+            <div>
+                <span class="superior">PAINEL ADMINISTRATIVO</span>
+                <h1>Dashboard de Vendas</h1>
+                <p>Acompanhe os resultados da sua planilha Excel.</p>
+            </div>
+
+            <div class="botoes">
+                <button id="atualizar" class="secundario">
+                    ↻ Atualizar
+                </button>
+
+                <button id="importar" class="primario">
+                    ↑ Importar Excel
+                </button>
+
+                <input type="file" id="arquivo"
+                       accept=".xlsx,.xls" hidden>
+            </div>
+        </header>
+
+        <div id="aviso" class="aviso" role="status">
+            Aguardando carregamento...
+        </div>
+
+        <section id="inicio">
+            <div class="titulo-secao">
+                <h2>Visão geral</h2>
+                <p>Indicadores calculados automaticamente.</p>
+            </div>
+
+            <div class="indicadores">
+                <article class="card">
+                    <span>Faturamento total</span>
+                    <h2 id="faturamento">R$ 0,00</h2>
+                    <p>Receita dos pedidos</p>
+                </article>
+
+                <article class="card">
+                    <span>Total de pedidos</span>
+                    <h2 id="totalPedidos">0</h2>
+                    <p>Pedidos registrados</p>
+                </article>
+
+                <article class="card">
+                    <span>Produtos vendidos</span>
+                    <h2 id="quantidade">0</h2>
+                    <p>Unidades comercializadas</p>
+                </article>
+
+                <article class="card">
+                    <span>Ticket médio</span>
+                    <h2 id="ticket">R$ 0,00</h2>
+                    <p>Valor médio por pedido</p>
+                </article>
+            </div>
+
+            <div class="card filtros">
+                <label>
+                    Região
+                    <select id="regiao">
+                        <option value="">Todas as regiões</option>
+                    </select>
+                </label>
+
+                <label>
+                    Produto
+                    <select id="produto">
+                        <option value="">Todos os produtos</option>
+                    </select>
+                </label>
+
+                <label>
+                    Estado
+                    <select id="estado">
+                        <option value="">Todos os estados</option>
+                    </select>
+                </label>
+
+                <button id="limpar" class="secundario">
+                    Limpar filtros
+                </button>
+            </div>
+        </section>
+
+        <section id="analises">
+            <div class="titulo-secao">
+                <h2>Análise de vendas</h2>
+                <p>Gráficos gerados a partir dos pedidos.</p>
+            </div>
+
+            <div class="graficos">
+                <article class="card">
+                    <h3>Faturamento por região</h3>
+                    <div class="area-grafico">
+                        <canvas id="graficoRegiao"></canvas>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h3>Produtos mais vendidos</h3>
+                    <div class="area-grafico">
+                        <canvas id="graficoProduto"></canvas>
+                    </div>
+                </article>
+
+                <article class="card grande">
+                    <h3>Evolução das vendas</h3>
+                    <div class="area-grafico">
+                        <canvas id="graficoData"></canvas>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="pedidos">
+            <div class="titulo-secao">
+                <h2>Pedidos registrados</h2>
+                <p>Informações extraídas do Excel.</p>
+            </div>
+
+            <div class="card">
+                <div class="barra-tabela">
+                    <input id="pesquisa" type="search"
+                           placeholder="Pesquisar pedidos...">
+                    <button id="exportar" class="secundario">
+                        Exportar CSV
+                    </button>
+                </div>
+
+                <div class="rolagem">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Região</th>
+                                <th>Estado</th>
+                                <th>Produto</th>
+                                <th>Data</th>
+                                <th>Qtd.</th>
+                                <th>Valor unitário</th>
+                                <th>Frete</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela">
+                            <tr>
+                                <td colspan="9">
+                                    Aguardando dados...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="rodape-tabela">
+                    <span id="registros">0 registros</span>
+                    <strong id="totalTabela">R$ 0,00</strong>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
